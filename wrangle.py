@@ -1,6 +1,7 @@
 import pandas as pd
 import os.path
 import re
+import env
 
 def acquire_store_data():
 
@@ -56,7 +57,8 @@ def prep_store_data(df = acquire_store_data()):
     df.columns = [re.sub(r'[^a-zA-Z]', '_', col.lower()) for col in df.columns]
 
     # Drop foreign key columns
-    df = df.drop(columns=['customer_id', 'product_id', 'category_id', 'region_id'])
+    df = df.drop(columns=['customer_id', 'product_id',
+                          'category_id', 'region_id', 'country'])
     
     # Convert date columns to datetime
     df['order_date'] = pd.to_datetime(df['order_date'])
@@ -70,7 +72,24 @@ def prep_store_data(df = acquire_store_data()):
     df['order_month'] = df['order_date'].dt.month
     df['order_year'] = df['order_date'].dt.year
     
-    # Calculate cost column
+    # Calculate cost and margin column
     df['cost'] = df['sales'] - df['profit']
+    df['margin'] = df['profit'] / df['sales']
     
+    # Create bins and labels for the discounts
+    bins = [-0.1, 0, .2, 1.01]  # The ranges for each bin
+    labels = ['0', '0 - .2', '>.2']  # Labels for each bin
+    # Create a new column 'discount_bin' with the bin labels
+    df['discount_bin'] = pd.cut(df['discount'], bins=bins, labels=labels)
+    
+    # Create a new column 'price'
+    df['price'] = df['sales'] / (1 - df['discount'])
+    
+    # Create bins and labels for the price
+    bins = [0, 20, 100, 300, float('inf')]  # The ranges for each bin
+    labels = ['cheap', 'medium', 'expensive', 'very-expensive']  # Labels for each bin
+
+    # Create a new column 'price_bin' with the bin labels
+    df['price_bin'] = pd.cut(df['price'], bins=bins, labels=labels)
+
     return df
