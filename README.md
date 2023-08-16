@@ -4,6 +4,8 @@
 
 by Martin Reyes
 
+Note: project originally done in [this](ttps://github.com/prestige-worldwide-1/discount_analysis_project) repo
+
 ## Project Description
 
 In this EDA project, superstore transaction data is acquired from a SQL database and prepared in Python. This data can then be analyzed to see if discount rates drive sales while maintaining profits for the company. Analysis will also be done to see how discount rates drive customer retention.
