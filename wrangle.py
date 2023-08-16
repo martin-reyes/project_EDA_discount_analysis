@@ -78,7 +78,7 @@ def prep_store_data(df = acquire_store_data()):
     
     # Create bins and labels for the discounts
     bins = [-0.1, 0, .2, 1.01]  # The ranges for each bin
-    labels = ['0', '0 - .2', '>.2']  # Labels for each bin
+    labels = ['0', '.1 - .2', '>.2']  # Labels for each bin
     # Create a new column 'discount_bin' with the bin labels
     df['discount_bin'] = pd.cut(df['discount'], bins=bins, labels=labels)
     

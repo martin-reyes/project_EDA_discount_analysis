@@ -17,7 +17,7 @@ def plot_counts(df, columns):
             frequencies = counts / counts.sum()
 
             # Create a figure with two subplots
-            fig, axes = plt.subplots(1, 2, figsize=(10, 4))
+            fig, axes = plt.subplots(1, 2, figsize=(9, 3))
 
             # Plot raw countplot in the first subplot
             sns.barplot(x=counts.index, y=counts.values,
@@ -90,10 +90,10 @@ def analyze_discount_rates(df):
     
 def plot_metric_distributions(df, item_type_string):
     
-    low_disc_df = df[df['discount_bin'] == '0 - .2']
+    low_disc_df = df[df['discount_bin'] == '.1 - .2']
     non_disc_df = df[df['discount_bin'] == '0']
     
-    fig, axes = plt.subplots(nrows=3, ncols=2, figsize=(8,7.5))
+    fig, axes = plt.subplots(nrows=3, ncols=2, figsize=(6, 6))
 
     metrics = ['sales', 'profit', 'quantity']
     data = [low_disc_df, non_disc_df]
@@ -117,7 +117,7 @@ def run_mann_whitneys_test(df, metric):
     H0 = f"Null Hypothesis: Average {metric} for low-discounted items and non-discounted items are equal."
     Ha = f"Alternative Hypothesis: Average {metric} for low-discounted items and non-discounted items are not equal."
     
-    low_disc_df = df[df['discount_bin'] == '0 - .2']
+    low_disc_df = df[df['discount_bin'] == '.1 - .2']
     non_disc_df = df[df['discount_bin'] == '0']
     
     # calculate test statistics and p-value.
