@@ -4,7 +4,7 @@
 
 by Martin Reyes
 
-Note: project originally done in [this](ttps://github.com/prestige-worldwide-1/discount_analysis_project) repo
+Note: project originally done in [this](https://github.com/prestige-worldwide-1/discount_analysis_project) repo
 
 ## Project Description
 
